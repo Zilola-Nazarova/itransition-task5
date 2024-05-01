@@ -1,7 +1,5 @@
-const Region = () => {
-  return(
-    <button>Region:</button>
-  );
-};
+const Region = () => (
+  <button type="button">Region:</button>
+);
 
 export default Region;

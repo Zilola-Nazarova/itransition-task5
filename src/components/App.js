@@ -1,12 +1,12 @@
-import './App.css';
+import '../App.css';
+import Navbar from './Navbar';
+import Table from './Table';
 
-function App() {
-  return (
-    <>
-      <Navbar />
-      <Table />
-    </>
-  );
-};
+const App = () => (
+  <>
+    <Navbar />
+    <Table />
+  </>
+);
 
 export default App;

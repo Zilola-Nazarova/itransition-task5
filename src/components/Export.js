@@ -1,7 +1,5 @@
-const Export = () => {
-  return(
-    <button>Export</button>
-  );
-};
+const Export = () => (
+  <button type="button">Export</button>
+);
 
 export default Export;

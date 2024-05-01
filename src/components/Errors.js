@@ -1,7 +1,5 @@
-const Errors = () => {
-  return(
-    <button>Errors:</button>
-  );
-};
+const Errors = () => (
+  <button type="button">Errors:</button>
+);
 
 export default Errors;

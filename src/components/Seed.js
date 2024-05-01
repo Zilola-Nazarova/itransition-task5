@@ -1,7 +1,5 @@
-const Seed = () => {
-  return(
-    <button>Seed:</button>
-  );
-};
+const Seed = () => (
+  <button type="button">Seed:</button>
+);
 
 export default Seed;
