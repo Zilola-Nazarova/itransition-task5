@@ -1,10 +1,11 @@
 import '../App.css';
-import Navbar from './Navbar';
+import Navigation from './Navbar';
 import Table from './Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => (
   <>
-    <Navbar />
+    <Navigation />
     <Table />
   </>
 );
