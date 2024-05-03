@@ -7,7 +7,7 @@ function createRandomUser() {
     middleName: faker.person.middleName(),
     lastName: faker.person.lastName(),
     number: faker.phone.number(),
-    address: faker.date.streetAddress({ useFullAddress: true }),
+    address: faker.address.streetAddress({ useFullAddress: true }),
   };
 }
 
