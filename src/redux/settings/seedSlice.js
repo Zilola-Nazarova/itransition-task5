@@ -1,18 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { faker } from '@faker-js/faker';
 
 const initialState = {
-  value: 0,
+  value: faker.seed(),
 };
 
 export const seedSlice = createSlice({
   name: 'seed',
   initialState,
   reducers: {
-    seed: (state, action) => {
+    set: (state, action) => {
+      faker.seed(action.payload);
       state.value = action.payload;
+    },
+    random: (state) => {
+      state.value = faker.seed();
     },
   },
 });
 
-export const { seed } = seedSlice.actions;
+export const { set, random } = seedSlice.actions;
 export default seedSlice.reducer;
