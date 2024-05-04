@@ -7,7 +7,7 @@ import { generateRegions } from '../helpers/faker';
 const Region = () => {
   const region = useSelector((state) => state.region.value);
   const dispatch = useDispatch();
-  const locales = generateRegions();
+  const regions = generateRegions();
   useEffect(() => {
     console.log(`Now region is ${region}`);
   }, [region]);
@@ -23,8 +23,10 @@ const Region = () => {
           onChange={(e) => dispatch(select(e.target.value))}
           value={region}
         >
-          {locales.map((location) => (
-            <option key={uuidv4()} value={location}>{location}</option>
+          {regions.map((obj) => (
+            <option key={uuidv4()} value={obj.code}>
+              {`${obj.name} (${obj.code})`}
+            </option>
           ))}
         </select>
       </label>
