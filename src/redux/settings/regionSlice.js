@@ -9,11 +9,11 @@ export const regionSlice = createSlice({
   name: 'region',
   initialState,
   reducers: {
-    select: (state, action) => {
+    selectRegion: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { select } = regionSlice.actions;
+export const { selectRegion } = regionSlice.actions;
 export default regionSlice.reducer;

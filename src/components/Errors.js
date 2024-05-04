@@ -1,13 +1,9 @@
-// import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { set } from '../redux/settings/errorsSlice';
+import { setErrors } from '../redux/settings/errorsSlice';
 
 const Errors = () => {
   const errors = useSelector((state) => state.errors.value);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   console.log(`Now errors is ${errors}`);
-  // }, [errors]);
 
   return (
     <>
@@ -22,7 +18,7 @@ const Errors = () => {
           id="errors"
           value={errors > 10 ? 10 : errors}
           onChange={(e) => {
-            dispatch(set(e.target.value));
+            dispatch(setErrors(e.target.value));
           }}
         />
         <input
@@ -32,7 +28,7 @@ const Errors = () => {
           max="1000"
           value={errors}
           onChange={(e) => {
-            dispatch(set(e.target.value));
+            dispatch(setErrors(e.target.value));
           }}
         />
       </label>

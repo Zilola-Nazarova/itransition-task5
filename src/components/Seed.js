@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { set, random } from '../redux/settings/seedSlice';
+import { setSeed, randomSeed } from '../redux/settings/seedSlice';
 
 const Seed = () => {
   const seed = useSelector((state) => state.seed.value);
@@ -16,10 +16,10 @@ const Seed = () => {
           aria-label="Enter Seed"
           id="seed"
           value={seed}
-          onChange={(e) => dispatch(set(e.target.value))}
+          onChange={(e) => dispatch(setSeed(e.target.value))}
         />
         <Button
-          onClick={() => dispatch(random())}
+          onClick={() => dispatch(randomSeed())}
         >
           Random
         </Button>

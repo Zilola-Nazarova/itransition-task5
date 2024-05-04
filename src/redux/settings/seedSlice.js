@@ -9,15 +9,14 @@ export const seedSlice = createSlice({
   name: 'seed',
   initialState,
   reducers: {
-    set: (state, action) => {
-      faker.seed(action.payload);
-      state.value = action.payload;
+    setSeed: (state, action) => {
+      state.value = Number(action.payload);
     },
-    random: (state) => {
+    randomSeed: (state) => {
       state.value = faker.seed();
     },
   },
 });
 
-export const { set, random } = seedSlice.actions;
+export const { setSeed, randomSeed } = seedSlice.actions;
 export default seedSlice.reducer;

@@ -8,11 +8,11 @@ export const errorsSlice = createSlice({
   name: 'errors',
   initialState,
   reducers: {
-    set: (state, action) => {
+    setErrors: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { set } = errorsSlice.actions;
+export const { setErrors } = errorsSlice.actions;
 export default errorsSlice.reducer;
