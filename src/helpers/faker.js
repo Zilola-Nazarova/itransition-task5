@@ -1,11 +1,10 @@
 import { allFakers } from '@faker-js/faker';
-import { faker } from '@faker-js/faker';
 
-export const createRandomUser = () => ({
-  userId: faker.string.uuid(),
-  fullName: faker.person.fullName(),
-  number: faker.phone.number(),
-  address: faker.location.streetAddress({ useFullAddress: true }),
+export const createRandomUser = (code) => ({
+  userId: allFakers[code].string.uuid(),
+  fullName: allFakers[code].person.fullName(),
+  number: allFakers[code].phone.number(),
+  address: allFakers[code].location.streetAddress({ useFullAddress: true }),
 });
 
 export const generateRegions = () => Object.keys(allFakers).map((key) => {
