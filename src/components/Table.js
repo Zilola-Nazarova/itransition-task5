@@ -1,35 +1,19 @@
 import { useSelector } from 'react-redux';
 import { generateUsers } from '../helpers/faker';
+import TableRow from './TableRow';
+import TableContent from './TableContent';
 
 const Table = () => {
   const region = useSelector((state) => state.region.value);
   const seed = useSelector((state) => state.seed.value);
   const users = generateUsers(region, seed);
+  const content = users.map((user, i) => (
+    <TableRow key={user.userId} user={user} index={i + 1} />
+  ));
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <td>#</td>
-            <td>ID:</td>
-            <td>Name:</td>
-            <td>Address:</td>
-            <td>Phone number:</td>
-          </tr>
-        </thead>
-        <tbody>
-          { users.map((user, i) => (
-            <tr key={user.userId}>
-              <td>{i + 1}</td>
-              <td>{user.userId}</td>
-              <td>{user.fullName}</td>
-              <td>{user.address}</td>
-              <td>{user.number}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TableContent content={content} />
     </div>
   );
 };
