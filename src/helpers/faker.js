@@ -7,10 +7,10 @@ const createRandomUser = (code) => ({
   address: allFakers[code].location.streetAddress({ useFullAddress: true }),
 });
 
-export const generateUsers = (region, seed) => {
+export const generateUsers = (region, seed, quantity) => {
   faker.seed(seed);
   return faker.helpers.multiple(() => createRandomUser(region), {
-    count: 20,
+    count: quantity,
   });
 };
 
