@@ -16,15 +16,16 @@ export const generateUsers = (region, seed) => {
 
 export const generateRegions = () => {
   const codeToName = new Intl.DisplayNames(['en'], { type: 'language' });
-  const languages = Object.keys(allFakers).map((code) => {
+  const languages = [];
+  Object.keys(allFakers).map((code) => {
     try {
       allFakers[code].person.fullName();
       const langName = code.replace(/_/g, '-');
-      return { code, name: codeToName.of(langName) };
+      languages.push({ code, name: codeToName.of(langName) });
     } catch (e) {
       console.log(`Error for locale ${code} occured. Datails: ${e}`);
-      return e;
     }
+    return null;
   });
   return languages;
 };
