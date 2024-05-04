@@ -1,11 +1,18 @@
-import { allFakers } from '@faker-js/faker';
+import { allFakers, faker } from '@faker-js/faker';
 
-export const createRandomUser = (code) => ({
+const createRandomUser = (code) => ({
   userId: allFakers[code].string.uuid(),
   fullName: allFakers[code].person.fullName(),
   number: allFakers[code].phone.number(),
   address: allFakers[code].location.streetAddress({ useFullAddress: true }),
 });
+
+export const generateUsers = (region, seed) => {
+  faker.seed(seed);
+  return faker.helpers.multiple(() => createRandomUser(region), {
+    count: 20,
+  });
+};
 
 export const generateRegions = () => {
   const codeToName = new Intl.DisplayNames(['en'], { type: 'language' });

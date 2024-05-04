@@ -1,12 +1,10 @@
-import { faker } from '@faker-js/faker';
 import { useSelector } from 'react-redux';
-import { createRandomUser } from '../helpers/faker';
+import { generateUsers } from '../helpers/faker';
 
 const Table = () => {
   const region = useSelector((state) => state.region.value);
-  const users = faker.helpers.multiple(() => createRandomUser(region), {
-    count: 20,
-  });
+  const seed = useSelector((state) => state.seed.value);
+  const users = generateUsers(region, seed);
 
   return (
     <div>
@@ -26,8 +24,8 @@ const Table = () => {
               <td>{i + 1}</td>
               <td>{user.userId}</td>
               <td>{user.fullName}</td>
-              <td>{user.number}</td>
               <td>{user.address}</td>
+              <td>{user.number}</td>
             </tr>
           ))}
         </tbody>

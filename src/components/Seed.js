@@ -15,6 +15,7 @@ const Seed = () => {
           className="form-control"
           aria-label="Enter Seed"
           id="seed"
+          value={seed}
           onChange={(e) => dispatch(set(e.target.value))}
         />
         <Button
