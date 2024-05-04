@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { select } from '../redux/settings/regionSlice';
 import { generateRegions } from '../helpers/faker';
@@ -8,9 +8,9 @@ const Region = () => {
   const region = useSelector((state) => state.region.value);
   const dispatch = useDispatch();
   const regions = generateRegions();
-  useEffect(() => {
-    console.log(`Now region is ${region}`);
-  }, [region]);
+  // useEffect(() => {
+  //   console.log(`Now region is ${region}`);
+  // }, [region]);
 
   return (
     <>

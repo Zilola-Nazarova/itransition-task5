@@ -1,14 +1,10 @@
 import Button from 'react-bootstrap/Button';
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { set, random } from '../redux/settings/seedSlice';
 
 const Seed = () => {
   const seed = useSelector((state) => state.seed.value);
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(`Now seed is ${seed}`);
-  }, [seed]);
 
   return (
     <>

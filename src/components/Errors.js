@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { set } from '../redux/settings/errorsSlice';
 
 const Errors = () => {
   const errors = useSelector((state) => state.errors.value);
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(`Now errors is ${errors}`);
-  }, [errors]);
+  // useEffect(() => {
+  //   console.log(`Now errors is ${errors}`);
+  // }, [errors]);
 
   return (
     <>
