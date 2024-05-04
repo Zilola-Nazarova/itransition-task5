@@ -22,7 +22,7 @@ const Table = () => {
             <tr key={user.userId}>
               <td>{i + 1}</td>
               <td>{user.userId}</td>
-              <td>{user.firstName} {user.middleName} {user.lastName}</td>
+              <td>{user.fullName}</td>
               <td>{user.number}</td>
               <td>{user.address}</td>
             </tr>
