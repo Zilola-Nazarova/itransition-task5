@@ -7,12 +7,11 @@ const createRandomUser = (code) => ({
   address: allFakers[code].location.streetAddress({ useFullAddress: true }),
 });
 
-export const generateUsers = (region, seed, quantity) => {
-  faker.seed(seed);
-  return faker.helpers.multiple(() => createRandomUser(region), {
+export const generateUsers = (region, quantity) => faker.helpers.multiple(
+  () => createRandomUser(region), {
     count: quantity,
-  });
-};
+  },
+);
 
 export const generateRegions = () => {
   const codeToName = new Intl.DisplayNames(['en'], { type: 'language' });

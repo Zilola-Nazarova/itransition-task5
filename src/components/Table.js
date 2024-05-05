@@ -7,7 +7,7 @@ import TableContent from './TableContent';
 const Table = () => {
   const region = useSelector((state) => state.region.value);
   const seed = useSelector((state) => state.seed.value);
-  const fetchUsers = ({ pageParam }) => generateUsers(region, seed, pageParam);
+  const fetchUsers = ({ pageParam }) => generateUsers(region, pageParam);
 
   const {
     data,
@@ -20,9 +20,9 @@ const Table = () => {
     {
       queryKey: ['users', seed, region],
       queryFn: fetchUsers,
-      initialPageParam: 10,
+      initialPageParam: 20,
       getNextPageParam: (lastPage) => {
-        const nextPage = lastPage.length ? 10 : undefined;
+        const nextPage = lastPage.length ? 20 : undefined;
         return nextPage;
       },
     },
