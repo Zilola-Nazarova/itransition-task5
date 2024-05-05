@@ -4,7 +4,12 @@ import { setSeed, randomSeed } from '../redux/settings/seedSlice';
 
 const Seed = () => {
   const seed = useSelector((state) => state.seed.value);
+  const region = useSelector((state) => state.region.value);
   const dispatch = useDispatch();
+  const applySeed = (e) => (e
+    ? dispatch(setSeed({ seed: Number(e.target.value), region }))
+    : dispatch(randomSeed(region))
+  );
 
   return (
     <>
@@ -16,10 +21,10 @@ const Seed = () => {
           aria-label="Enter Seed"
           id="seed"
           value={seed}
-          onChange={(e) => dispatch(setSeed(e.target.value))}
+          onChange={applySeed}
         />
         <Button
-          onClick={() => dispatch(randomSeed())}
+          onClick={() => applySeed()}
         >
           Random
         </Button>
