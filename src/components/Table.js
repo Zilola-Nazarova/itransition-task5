@@ -25,6 +25,7 @@ const Table = () => {
         const nextPage = lastPage.length ? 20 : undefined;
         return nextPage;
       },
+      refetchOnWindowFocus: false,
     },
   );
 
