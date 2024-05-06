@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 import { generateUsers } from '../helpers/faker';
 import TableRow from './TableRow';
 import TableContent from './TableContent';
 
 const Table = () => {
+  const { ref, inView } = useInView();
   const region = useSelector((state) => state.region.value);
   const seed = useSelector((state) => state.seed.value);
   const fetchUsers = ({ pageParam }) => generateUsers(region, pageParam);
@@ -22,16 +25,29 @@ const Table = () => {
       queryFn: fetchUsers,
       initialPageParam: 20,
       getNextPageParam: (lastPage) => {
-        const nextPage = lastPage.length ? 20 : undefined;
+        const nextPage = lastPage.length ? 10 : undefined;
         return nextPage;
       },
       refetchOnWindowFocus: false,
     },
   );
 
-  const content = data?.pages.map((users, pages) => users.map((user, i) => (
-    <TableRow key={user.userId} user={user} index={pages * 20 + i + 1} />
-  )));
+  const content = data?.pages.map((users, pages) => (
+    users.map((user, i) => (
+      <TableRow
+        innerRef={(users.length === i + 1) ? ref : null}
+        key={user.userId}
+        user={user}
+        index={pages === 0 ? i + 1 : ((pages + 1) * 10) + i + 1}
+      />
+    ))
+  ));
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
 
   if (status === 'pending') {
     return <p>Loading...</p>;
@@ -45,26 +61,10 @@ const Table = () => {
     );
   }
 
-  const getButtonMessage = () => {
-    if (isFetchingNextPage) {
-      return 'Loading more data...';
-    }
-    if (hasNextPage) {
-      return 'Load more';
-    }
-    return 'Nothing more to load';
-  };
-
   return (
     <div>
       <TableContent content={content} />
-      <button
-        type="button"
-        onClick={() => fetchNextPage()}
-        disabled={!hasNextPage || isFetchingNextPage}
-      >
-        {getButtonMessage()}
-      </button>
+      {isFetchingNextPage && <h3>Loading...</h3>}
     </div>
   );
 };

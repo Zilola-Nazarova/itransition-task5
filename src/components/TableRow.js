@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-const TableRow = ({ user, index }) => (
-  <tr key={user.userId}>
+const TableRow = ({ innerRef, user, index }) => (
+  <tr key={user.userId} ref={innerRef}>
     <td>{index}</td>
     <td>{user.userId}</td>
     <td>{user.fullName}</td>
@@ -11,8 +11,13 @@ const TableRow = ({ user, index }) => (
 );
 
 TableRow.propTypes = {
+  innerRef: PropTypes.func,
   user: PropTypes.objectOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
+};
+
+TableRow.defaultProps = {
+  innerRef: null,
 };
 
 export default TableRow;
