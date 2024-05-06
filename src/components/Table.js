@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { generateUsers } from '../helpers/faker';
 import TableRow from './TableRow';
 import TableContent from './TableContent';
+import { updateCSV } from '../redux/settings/csvDataSlice';
 
 const Table = () => {
+  const csvData = [];
   const { ref, inView } = useInView();
+  const dispatch = useDispatch();
   const region = useSelector((state) => state.region.value);
   const seed = useSelector((state) => state.seed.value);
   const fetchUsers = ({ pageParam }) => generateUsers(region, pageParam);
@@ -33,17 +36,22 @@ const Table = () => {
   );
 
   const content = data?.pages.map((users, pages) => (
-    users.map((user, i) => (
-      <TableRow
-        innerRef={(users.length === i + 1) ? ref : null}
-        key={user.userId}
-        user={user}
-        index={pages === 0 ? i + 1 : ((pages + 1) * 10) + i + 1}
-      />
-    ))
+    users.map((user, i) => {
+      const index = pages === 0 ? i + 1 : ((pages + 1) * 10) + i + 1;
+      csvData.push({ index, ...user });
+      return (
+        <TableRow
+          innerRef={(users.length === i + 1) ? ref : null}
+          key={user.userId}
+          user={user}
+          index={index}
+        />
+      );
+    })
   ));
 
   useEffect(() => {
+    dispatch(updateCSV(csvData));
     if (inView && hasNextPage) {
       fetchNextPage();
     }
