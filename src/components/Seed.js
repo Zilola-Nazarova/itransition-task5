@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSeed, randomSeed } from '../redux/settings/seedSlice';
@@ -10,6 +11,9 @@ const Seed = () => {
     ? dispatch(setSeed({ seed: Number(e.target.value), region }))
     : dispatch(randomSeed(region))
   );
+  useEffect(() => {
+    dispatch(setSeed({ seed, region }));
+  }, [region]);
 
   return (
     <>
